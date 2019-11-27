@@ -3,6 +3,14 @@ echo "You must be the superuser to run this script" >&2
 exit 1
 fi
 
+UBP=$(ls /dev/ | grep "ttyUSB")
+
+if [ -z "$UBP" ]
+then
+      echo "FPGA not found"
+      exit 1
+fi
+
 git clone https://github.com/asanaullah/ZipVersa-SSDP.git
 cd ZipVersa-SSDP
 
@@ -90,6 +98,7 @@ dnf -y install xterm
 
 cd sw/host
 cd zipversa/sw/host
-xterm -hold  -e ./netuart /dev/ttyUSB1&
+xterm -hold  -e ./netuart /dev/$UBP&
+sleep 0.1
 xterm -hold  -e ./zipload ../rv32/gettysburg 
 cd ../../../..

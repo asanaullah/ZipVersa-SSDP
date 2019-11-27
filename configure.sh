@@ -80,7 +80,7 @@ cd zipversa/
 \cp  ../Makefile .
 \cp -f ../custom_ops.S sw/rv32/
 \cp -f ../Makefile_rv32 sw/rv32/Makefile
-cp rtl/fft/*.hex rtl/
+\cp rtl/fft/*.hex rtl/
 make
 
 

@@ -9,7 +9,7 @@ Run "source configure.sh" as super user
 ## Hardware Setup 
 
 
-![alt text](https://github.com/asanaullah/ZipVersa-SSDP/hardware_overview.png)
+![alt text](https://github.com/asanaullah/ZipVersa-SSDP/blob/master/hardware_overview.png)
 
 ## OS
 Fedora Release 30

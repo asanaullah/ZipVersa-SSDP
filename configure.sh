@@ -130,7 +130,6 @@ dnf -y install xterm
 dnf -y install octave
 
 cd sw/host
-cd zipversa/sw/host
 xterm -hold  -e ./netuart /dev/$UBP&
 sleep 0.1
 ./zipload ../rv32/fftmain

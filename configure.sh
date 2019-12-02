@@ -11,12 +11,16 @@ MASK=("FF" "FF" "FF" "00")
 
 
 
-UBP=$(ls /dev/ | grep "ttyUSB")
+UBP=$(ls /dev/ | grep "ttyUSB1")
 
 if [ -z "$UBP" ]
 then
-      echo "FPGA not found"
-      exit 1
+      UBP=$(ls /dev/ | grep "ttyUSB")
+      if [ -z "$UBP" ]
+      then
+      	echo "FPGA not found"
+      	exit 1
+      fi
 fi
 
 
@@ -69,6 +73,7 @@ cd ..
 
 
 dnf -y install verilator
+dnf -y install gtkwave
 
 git clone https://github.com/ZipCPU/autofpga
 cd autofpga/
@@ -112,6 +117,7 @@ sed -i "208i 	UDPSOCKET *skt = new UDPSOCKET(\"${DEVIP[0]}.${DEVIP[1]}.${DEVIP[2
 
 
 \cp  ../Makefile .
+\cp -f ../chkfftresults.m sw/host/
 \cp -f ../custom_ops.S sw/rv32/
 \cp -f ../Makefile_rv32 sw/rv32/Makefile
 \cp rtl/fft/*.hex rtl/
@@ -121,10 +127,13 @@ make
 openocd -f ecp5-versa.cfg -c "transport select jtag; init; svf rtl/zipversa.svf; exit"
 
 dnf -y install xterm
+dnf -y install octave
 
 cd sw/host
 cd zipversa/sw/host
 xterm -hold  -e ./netuart /dev/$UBP&
 sleep 0.1
-xterm -hold  -e ./zipload ../rv32/gettysburg 
+./zipload ../rv32/fftmain
+./testfft
+octave ./chkfftresults.m 
 cd ../../..

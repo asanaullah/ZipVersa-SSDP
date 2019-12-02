@@ -7,18 +7,17 @@ fftln = 1024;
 fq = (0:(fftln-1))/fftln;
 
 
-fig = figure;
+figure;
 idx = 0;
-subplot(2,2,1);
 plot(fq, dat(1,1+(idx*1024):(idx+1)*1024), fq, dat(2,1+(idx*1024):(idx+1)*1024));
 idx = 1;
-subplot(2,2,2);
+figure;
 plot(fq, dat(1,1+(idx*1024):(idx+1)*1024), fq, dat(2,1+(idx*1024):(idx+1)*1024));
 idx = 2;
-subplot(2,2,3);
+figure;
 plot(fq, dat(1,1+(idx*1024):(idx+1)*1024), fq, dat(2,1+(idx*1024):(idx+1)*1024));
 idx = 3;
-subplot(2,2,4);
+fig=figure;
 plot(fq, dat(1,1+(idx*1024):(idx+1)*1024), fq, dat(2,1+(idx*1024):(idx+1)*1024));
 
 waitfor(fig);

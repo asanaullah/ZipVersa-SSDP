@@ -19,7 +19,10 @@ then
       exit 1
 fi
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> bb153afa25940279b20b9c371181fcd881f9c212
 dnf -y groupinstall "Development Tools" "Development Libraries"
 dnf -y install cmake clang bison flex mercurial gperf tcl-devel libftdi-devel python-xdot graphviz
 git clone https://github.com/YosysHQ/yosys.git
@@ -127,4 +130,4 @@ cd zipversa/sw/host
 xterm -hold  -e ./netuart /dev/$UBP&
 sleep 0.1
 xterm -hold  -e ./zipload ../rv32/gettysburg 
-cd ../../../..
+cd ../../..

@@ -133,6 +133,7 @@ cd sw/host
 xterm -hold  -e ./netuart /dev/$UBP&
 sleep 0.1
 ./zipload ../rv32/fftmain
+sleep 5
 ./testfft
 octave ./chkfftresults.m 
 cd ../../..

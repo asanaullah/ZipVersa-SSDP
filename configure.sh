@@ -116,11 +116,11 @@ sed -i "208i 	UDPSOCKET *skt = new UDPSOCKET(\"${DEVIP[0]}.${DEVIP[1]}.${DEVIP[2
 
 
 
-\cp  ../Makefile .
-\cp -f ../chkfftresults.m sw/host/
-\cp -f ../custom_ops.S sw/rv32/
-\cp -f ../Makefile_rv32 sw/rv32/Makefile
-\cp rtl/fft/*.hex rtl/
+#\cp  ../Makefile .
+#\cp -f ../chkfftresults.m sw/host/
+#\cp -f ../custom_ops.S sw/rv32/
+#\cp -f ../Makefile_rv32 sw/rv32/Makefile
+#\cp rtl/fft/*.hex rtl/
 make
 
 

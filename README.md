@@ -10,11 +10,6 @@
 - Run "source configure.sh" as super user
 - Once all dependencies have been downloaded/configured/installed, the FFT example will execute and the graphs for results will be displayed. 
  
-## Hardware Setup 
-The ZipVersa design currently supports UDP based networking using Ethernet Port 1 of the Lattice board (i.e. the port closer to the USB cable). There are two major limitations to this support: 1) no DHCP support i.e. requires a static IP to be assigned for the FPGA, and 2) no Tri-Speed Ethernet MAC i.e. it can only operate at 1Gbps. If you have a router with 1Gbps LAN ports, simply connect the board and host machine to it, set up the DNS, and you should be good to go. 
-
-In my case, the router had 100Mbps LAN ports. 
-![alt text](https://github.com/asanaullah/ZipVersa-SSDP/blob/master/hardware_overview.png)
 
 ## OS
 Fedora Release 30
@@ -23,6 +18,14 @@ Fedora Release 30
 Lattice ECP-5G Versa Board with Micron Flash 
 (support for Macronix flash is under development)
 
+
+## Hardware Setup 
+The ZipVersa design currently supports UDP based networking using Ethernet Port 1 of the Lattice board (i.e. the port closer to the USB cable). There are two major limitations to this support: 1) no DHCP support i.e. requires a static IP to be assigned for the FPGA, and 2) no Tri-Speed Ethernet MAC i.e. it can only operate at 1Gbps. If you have a router with 1Gbps LAN ports, simply connect the board and host machine to it, set up the DNS, and you should be good to go. 
+
+In my case, the router had 100Mbps LAN ports. 
+![alt text](https://github.com/asanaullah/ZipVersa-SSDP/blob/master/hardware_overview.png)
+
+
 ## Before You Begin
 
 
@@ -30,6 +33,13 @@ Lattice ECP-5G Versa Board with Micron Flash
 ## Script Description
 
 
+
+```c
+if [ $(id -u) != "0" ]; then
+echo "You must be the superuser to run this script" >&2
+exit 1
+fi
+```
 
 
 ## Example Designs

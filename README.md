@@ -1,4 +1,4 @@
-# ZipVersa-Single Source Deployment Project
+# ZipVersa - Single Source Deployment Project
 
 ## Overview
 The goal of the [ZipVersa](https://github.com/ZipCPU/zipvera) project was to demonstrate how a completely open source tool chain can be used to compile HDL designs, including a RISCV core, to a Lattice ECP5-5G Versa FPGA board. This Single Source Deployment Project (SSDP) simplifies the process of setting up enviroment/tools by providing a script for doing so. Details are provided below for the different tools installed/configured, as well as a description of how to get example projects/simulations up and running.

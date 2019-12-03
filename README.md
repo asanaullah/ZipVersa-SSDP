@@ -1,12 +1,13 @@
 # ZipVersa-Single Source Deployment Project
 
 ## Overview
-The goal of the ZipVersa project was to demonstrate how a completely open source tool chain can be used to compile HDL designs, including a RISCV core, to a Lattice ECP5-5G Versa FPGA board. This Single Source Deployment Project (SSDP) simplifies the process of setting up enviroment/tools by providing a script for doing so. Details are provided below for the different tools installed/configured, as well as a description of how to get example projects/simulations up and running.
+The goal of the [ZipVersa](https://github.com/ZipCPU/zipvera) project was to demonstrate how a completely open source tool chain can be used to compile HDL designs, including a RISCV core, to a Lattice ECP5-5G Versa FPGA board. This Single Source Deployment Project (SSDP) simplifies the process of setting up enviroment/tools by providing a script for doing so. Details are provided below for the different tools installed/configured, as well as a description of how to get example projects/simulations up and running.
 
 Note that the ZipVersa project was forked since changes needed to be made downstream for bugfixes, customization of network parameters, addition of support for SPI flash (under development) etc. A tarball for the tested version of OpenOCD is also included.    
 
 ## TL;DR
 - Connect the FPGA (using the inner port) to a router with 1Gbps LAN ports using Cat5e or higher grade cables (I used Cat6). 
+- Connect the FPGA to the host using the USB cable.
 - Set up a static IP for the FPGA. 
 - Update configure.sh with i) host IP, ii) device IP, iii) subnet mask, iv) device MAC address, and v) router IP. 
 - Run "source configure.sh" as super user
@@ -34,7 +35,9 @@ Link status can be easily verified by running "./netstat" from "zipversa/sw/host
 
 ### Verify Jumper Placement
 From  https://github.com/SymbiFlow/prjtrellis/blob/master/examples/versa5g/README.md:
-"If your Versa board is new, you will need to change J50 to bypass the iSPclock. Re-arrange the jumpers to connect pins 1-2 and 3-5 (leaving one jumper spare). See p19 of the Versa Board user guide."
+"If your Versa board is new, you will need to change J50 to bypass the iSPclock. Re-arrange the jumpers to connect pins 1-2 and 3-5 (leaving one jumper spare)."
+
+See page 20 the [user guide](https://www.mouser.com/catalog/additional/Lattice_EB98.pdf).
 
 ### Verify Flash Device
 The flash controller is configured to run in QUAD I/O XIP mode and uses commands specific to the Micron N25Q128A flash device. While the Macronix flash device has similar commands, it does not support XIP mode. Therefore, the design currently only works with Micron N25Q128A flash devices (or a device with XIP support and the same commands as Micron)

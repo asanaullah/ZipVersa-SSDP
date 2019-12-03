@@ -29,7 +29,11 @@ In my case, the router had 100Mbps LAN ports. Since only the FPGA has a hard req
 
 ![alt text](https://github.com/asanaullah/ZipVersa-SSDP/blob/master/hardware_overview.png)
 
-Link status can be easily verified by running "./netstat" from "zipversa/sw/host" once the design has been loaded. 
+Link status can be easily verified by running 
+```bash
+./netstat
+```
+from `zipversa/sw/host` once the design has been loaded. 
 
 ## Before You Begin
 

@@ -263,12 +263,15 @@ Note that once the flash memory has been programmed, the design will start execu
 Also note that it is likely that there will be a couple of failed attempts to get the MAC address; this is fine. If, however, the `xterm` window opened earlier continues to print that the ARP-lookup failed, double check the network parameters specified in the beginning and run `./netstat` to verify that the link is 1000Mbps.  
 
 #### Run FFT Application
-Running `./testfft` causes the board to send out ARP-packets again, this time trying to get the MAC address of the host machine. Then 
+Running `./testfft` causes the board to send out ARP-packets again, this time trying to get the MAC address of the host machine. Then the `testfft` application sends the board four impulse functions, which computes the FFT, and returns the transforms back to the host. 
 ```c
 ./testfft
 ```
+The figure below shows an example result of loading the FFT program onto the board and running the host application. Note that the errors seen are due to a mismatch in the operating frequencies of the RISCV core and the network controller. This should not significantly impact the observed waveforms in the next step of the script. 
+![alt text](https://github.com/asanaullah/ZipVersa-SSDP/blob/master/fft_uart_display.png)
 
 #### Display results returned by FPGA
+Finally, we plot the waveforms for the four returned transforms. 
 ```c
 dnf -y install octave
 octave ./chkfftresults.m 

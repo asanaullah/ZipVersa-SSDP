@@ -95,36 +95,23 @@ dnf -y install ncurses-devel
 
 git clone https://github.com/asanaullah/zipversa
 cd zipversa/
-
 sed -i "58d" sw/rv32/etcnet.h
 sed -i "58i #define	DEFAULTMAC	0x${DEVMAC}ul" sw/rv32/etcnet.h
-
 sed -i "66d" sw/rv32/etcnet.h
 sed -i "66i #define	DEFAULTIP	IPADDR(${DEVIP[0]},${DEVIP[1]},${DEVIP[2]},${DEVIP[3]})" sw/rv32/etcnet.h
-
 sed -i "72d" sw/rv32/etcnet.h
 sed -i "72i #define	LCLNETMASK 0x${MASK[0]}${MASK[1]}${MASK[2]}${MASK[3]}" sw/rv32/etcnet.h
-
 sed -i "77d" sw/rv32/etcnet.h
 sed -i "77i #define	DEFAULT_ROUTERIP	IPADDR(${ROUTERIP[0]},${ROUTERIP[1]},${ROUTERIP[2]},${ROUTERIP[3]})" sw/rv32/etcnet.h
-
 sed -i "148d" sw/host/udpsocket.cpp
 sed -i "148i 	getaddrinfo(\"${HOSTIP[0]}.${HOSTIP[1]}.${HOSTIP[2]}.${HOSTIP[3]}\", portstr, &hints, &res);" sw/host/udpsocket.cpp
-
 sed -i "208d" sw/host/testfft.cpp
 sed -i "208i 	UDPSOCKET *skt = new UDPSOCKET(\"${DEVIP[0]}.${DEVIP[1]}.${DEVIP[2]}.${DEVIP[3]}\");" sw/host/testfft.cpp
-
-
-
-#\cp  ../Makefile .
-#\cp -f ../chkfftresults.m sw/host/
-#\cp -f ../custom_ops.S sw/rv32/
-#\cp -f ../Makefile_rv32 sw/rv32/Makefile
-#\cp rtl/fft/*.hex rtl/
 make
 
 
 openocd -f ecp5-versa.cfg -c "transport select jtag; init; svf rtl/zipversa.svf; exit"
+
 
 dnf -y install xterm
 

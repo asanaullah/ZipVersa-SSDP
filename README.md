@@ -33,7 +33,7 @@ In my case, the router had 100Mbps LAN ports.
 ## Script Description
 
 
-# Super User
+### Super User
 ```c
 if [ $(id -u) != "0" ]; then
 echo "You must be the superuser to run this script" >&2

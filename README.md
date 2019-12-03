@@ -4,7 +4,7 @@
 
 
 ## TL;DR
-- Connect the FPGA (using the inner port) to a router with 1Gbps LAN ports. 
+- Connect the FPGA (using the inner port) to a router with 1Gbps LAN ports using Cat5e or higher grade cables (I used Cat6). 
 - Set up a static IP for the FPGA. 
 - Update configure.sh with i) host IP, ii) device IP, iii) subnet mask, iv) device MAC address, and v) router IP. 
 - Run "source configure.sh" as super user
@@ -19,6 +19,9 @@ In my case, the router had 100Mbps LAN ports.
 ## OS
 Fedora Release 30
 
+## Board
+Lattice ECP-5G Versa Board with Micron Flash 
+(support for Macronix flash is under development)
 
 ## Before You Begin
 

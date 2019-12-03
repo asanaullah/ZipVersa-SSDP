@@ -127,7 +127,6 @@ make
 openocd -f ecp5-versa.cfg -c "transport select jtag; init; svf rtl/zipversa.svf; exit"
 
 dnf -y install xterm
-dnf -y install octave
 
 cd sw/host
 xterm -hold  -e ./netuart /dev/$UBP&
@@ -135,5 +134,6 @@ sleep 0.1
 ./zipload ../rv32/fftmain
 sleep 5
 ./testfft
+dnf -y install octave
 octave ./chkfftresults.m 
 cd ../../..

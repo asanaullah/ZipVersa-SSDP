@@ -22,13 +22,23 @@ Lattice ECP-5G Versa Board with Micron Flash
 ## Hardware Setup 
 The ZipVersa design currently supports UDP based networking using Ethernet Port 1 of the Lattice board (i.e. the port closer to the USB cable). There are two major limitations to this support: 1) no DHCP support i.e. requires a static IP to be assigned for the FPGA, and 2) no Tri-Speed Ethernet MAC i.e. it can only operate at 1Gbps. If you have a router with 1Gbps LAN ports, simply connect the board and host machine to it, set up the DNS, and you should be good to go. 
 
-In my case, the router had 100Mbps LAN ports. 
+In my case, the router had 100Mbps LAN ports. Since only the FPGA has a hard requirement for a 1Gbps link, I simply cascaded the router with a switch (instead of buying a new router) as shown in the figure below. Now, the FPGA and host talk to the switch over a 1Gbps link, while the link to the router is 100Mbps. 
+
 ![alt text](https://github.com/asanaullah/ZipVersa-SSDP/blob/master/hardware_overview.png)
 
+Link status can be easily verified by running "./netstat" from "zipversa/sw/host" once the design has been loaded. 
 
 ## Before You Begin
 
+### Verify Jumper Placement
+From  https://github.com/SymbiFlow/prjtrellis/blob/master/examples/versa5g/README.md:
+"If your Versa board is new, you will need to change J50 to bypass the iSPclock. Re-arrange the jumpers to connect pins 1-2 and 3-5 (leaving one jumper spare). See p19 of the Versa Board user guide."
 
+### Verify Flash Device
+The flash controller is configured to run in QUAD I/O XIP mode and uses commands specific to the Micron N25Q128A flash device. While the Macronix flash device has similar commands, it does not support XIP mode. Therefore, the design currently only works with Micron N25Q128A flash devices (or a device with XIP support and the same commands as Micron)
+
+### Verify Network Connectivity
+Verify IP addresses of the testbed, as well as MAC address of the board. 
 
 ## Script Description
 

@@ -1,7 +1,9 @@
 # ZipVersa-SSDP
 
 ## Overview
+The goal of the ZipVersa project was to demonstrate how a completely open source tool chain can be used to compile HDL designs, including a RISCV core, to a Lattice ECP5-5G Versa FPGA board. This Single Source Deployment Project (SSDP) simplifies the process of setting up enviroment/tools by providing a script for doing so. Details are provided below for the different tools installed/configured, as well as a description of how to get example projects/simulations up and running.
 
+Note that the ZipVersa project was forked since changes needed to be made downstream for bugfixes, customization of network parameters, addition of support for SPI flash (under development) etc. A tarball for the tested version of OpenOCD is also included.    
 
 ## TL;DR
 - Connect the FPGA (using the inner port) to a router with 1Gbps LAN ports using Cat5e or higher grade cables (I used Cat6). 

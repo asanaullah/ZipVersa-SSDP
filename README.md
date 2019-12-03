@@ -38,7 +38,7 @@ From  https://github.com/SymbiFlow/prjtrellis/blob/master/examples/versa5g/READM
 The flash controller is configured to run in QUAD I/O XIP mode and uses commands specific to the Micron N25Q128A flash device. While the Macronix flash device has similar commands, it does not support XIP mode. Therefore, the design currently only works with Micron N25Q128A flash devices (or a device with XIP support and the same commands as Micron)
 
 ### Verify Network Connectivity
-Verify IP addresses of the testbed, as well as MAC address of the board. 
+Verify IP addresses of the testbed, as well as MAC address of the board. Ensure that the networking hardware, including cables, support Gigabit ethernet.
 
 ## Script Description
 

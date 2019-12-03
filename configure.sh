@@ -93,7 +93,7 @@ cd ..
 
 dnf -y install ncurses-devel
 
-git clone https://github.com/ZipCPU/zipversa
+git clone https://github.com/asanaullah/zipversa
 cd zipversa/
 
 sed -i "58d" sw/rv32/etcnet.h

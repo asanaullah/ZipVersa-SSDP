@@ -1,7 +1,7 @@
 # ZipVersa - Single Source Deployment Project
 
 ## Overview
-The goal of the [ZipVersa](https://github.com/ZipCPU/zipvera) project was to demonstrate how a completely open source tool chain can be used to compile HDL designs, including a RISCV core, to a Lattice ECP5-5G Versa FPGA board. This Single Source Deployment Project (SSDP) simplifies the process of setting up enviroment/tools by providing a script for doing so. Details are provided below for the different tools installed/configured, as well as a description of how to get example projects/simulations up and running.
+The goal of the [ZipVersa](https://github.com/ZipCPU/zipvera) project was to demonstrate how a completely open source tool chain can be used to compile HDL designs, including a RISCV core, to a Lattice ECP5-5G Versa FPGA board. This Single Source Deployment Project (SSDP) simplifies the process of setting up environment/tools by providing a script for doing so. Details are provided below for the different tools installed/configured, as well as a description of how to get example projects/simulations up and running.
 
 Note that the ZipVersa project was forked since changes needed to be made downstream for bugfixes, customization of network parameters, addition of support for SPI flash (under development) etc. A tarball for the tested version of OpenOCD is also included.    
 
@@ -37,7 +37,7 @@ from `zipversa/sw/host` once the design has been loaded.
 
 ## Before You Begin
 ### Verify Jumper Placement
-From  [Project Trellis](https://github.com/SymbiFlow/prjtrellis/blob/master/examples/versa5g/README.md): "If your Versa board is new, you will need to change J50 to bypass the iSPclock. Re-arrange the jumpers to connect pins 1-2 and 3-5 (leaving one jumper spare)."
+From  [Project Trellis](https://github.com/SymbiFlow/prjtrellis/blob/master/examples/versa5g/README.md): "If your Versa board is new, you will need to change J50 to bypass the iSPclock. Rearrange the jumpers to connect pins 1-2 and 3-5 (leaving one jumper spare)."
 See page 20 of the [user guide](https://www.mouser.com/catalog/additional/Lattice_EB98.pdf).
 ### Verify Flash Device
 The flash controller is configured to run in QUAD I/O XIP mode and uses commands specific to the Micron N25Q128A flash device. While the Macronix flash device has similar commands, it does not support XIP mode. Therefore, the design currently only works with Micron N25Q128A flash devices (or a device with XIP support and the same commands as Micron)
@@ -50,9 +50,8 @@ Bus 001 Device 003: ID 0403:6010 Future Technology Devices International, Ltd FT
 ```
 
 ## Script Description
-
-
 ### Super User
+A simple check to get us started. While not everything requires super user privileges, enough does that it is just convenient to do the entire thing this way. 
 ```c
 if [ $(id -u) != "0" ]; then
 echo "You must be the superuser to run this script" >&2
@@ -61,6 +60,12 @@ fi
 ```
 
 ### IP and MAC Addresses
+Next we add in our custom network parameters for the FPGA static IP4 address (`DEVIP`), host machine IP4 address (`HOSTIP`), gateway IP4 address (`ROUTERIP`), FPGA MAC address (`DEVMAC`) and the subnet mask (`MASK`). 
+
+If you are running this project using QEMU/KVM, the `ROUTERIP` is the physical gateway and `HOSTIP` is the virtual IP4 address for the VM. 
+
+`DEVMAC` is currently taken as is from the original ZipVersa project. 
+
 ```c
 DEVIP=(192 168 8 10)
 HOSTIP=(192 168 8 100)
@@ -71,6 +76,9 @@ MASK=("FF" "FF" "FF" "00")
 
 
 ### Select TTY Device
+Next we select the FPGA tty device. This will be the serial port used to communicate with the FPGA once the ZipVersa base design has been loaded. 
+
+It was `ttyUSB1` for me  and so the script tries to set that if possible. If `ttyUSB1` cannot be found, then a wildcard search is done and the first device containing `ttyUSB` is selected. If the command fails there too, run `lsusb` and verify that the host machine can detect the FPGA. If the FPGA is detected, or if the `netuart` command below fails to open the port due to incorrect `ttyUSB` selection, try setting this value manually. 
 ```c
 UBP=$(ls /dev/ | grep "ttyUSB1")
 if [ -z "$UBP" ]
@@ -85,6 +93,9 @@ fi
 ```
 
 ### YOSYS
+Now that we are all set with specifying our testbed specific parameters, let's get to setting up the environment. First up is Yosys, an open source systhesis tool. This basically generates a 
+
+
 ```c
 dnf -y groupinstall "Development Tools" "Development Libraries"
 dnf -y install cmake clang bison flex mercurial gperf tcl-devel libftdi-devel python-xdot graphviz

@@ -42,6 +42,13 @@ The flash controller is configured to run in QUAD I/O XIP mode and uses commands
 ### Verify Network Connectivity
 Verify IP addresses of the testbed, as well as MAC address of the board. Ensure that the networking hardware, including cables, support Gigabit ethernet.
 
+### Verify Host Connectivity
+Ensure that your machine can see the FPGA via the USB cable. Running `lsusb` should print out something along the lines of:
+
+```bash
+Bus 001 Device 003: ID 0403:6010 Future Technology Devices International, Ltd FT2232C/D/H Dual UART/FIFO IC
+```
+
 ## Script Description
 
 

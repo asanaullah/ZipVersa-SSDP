@@ -34,9 +34,7 @@ Link status can be easily verified by running "./netstat" from "zipversa/sw/host
 ## Before You Begin
 
 ### Verify Jumper Placement
-From  https://github.com/SymbiFlow/prjtrellis/blob/master/examples/versa5g/README.md:
-"If your Versa board is new, you will need to change J50 to bypass the iSPclock. Re-arrange the jumpers to connect pins 1-2 and 3-5 (leaving one jumper spare)."
-
+From  [Project Trellis](https://github.com/SymbiFlow/prjtrellis/blob/master/examples/versa5g/README.md): "If your Versa board is new, you will need to change J50 to bypass the iSPclock. Re-arrange the jumpers to connect pins 1-2 and 3-5 (leaving one jumper spare)."
 See page 20 the [user guide](https://www.mouser.com/catalog/additional/Lattice_EB98.pdf).
 
 ### Verify Flash Device
@@ -47,7 +45,6 @@ Verify IP addresses of the testbed, as well as MAC address of the board. Ensure 
 
 ### Verify Host Connectivity
 Ensure that your machine can see the FPGA via the USB cable. Running `lsusb` should print out something along the lines of:
-
 ```bash
 Bus 001 Device 003: ID 0403:6010 Future Technology Devices International, Ltd FT2232C/D/H Dual UART/FIFO IC
 ```

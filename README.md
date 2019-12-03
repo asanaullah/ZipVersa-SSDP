@@ -274,19 +274,18 @@ dnf -y install octave
 octave ./chkfftresults.m 
 ```
 
-## Example Designs
+## Other Example Designs
+Execute from `zipversa/sw/host`. Ensure that `netuart` is running. 
+#### Gettysburg
+`./zipload ../rv32/gettysburg`
+This will print out the Gettysburg address on the `netuart` terminal. 
 
-1. Gettysburg
-
-
-2. Ping Test
-
-
-3. FFT Test
+#### Ping Test
+`./zipload ../rv32/pingtest`
+This will ping the router and print the results on the `netuart` terminal. 
 
 
 ## Simulation
+From `zipversa/sim/verilated/README.md`:
+"To run the simulation , first kill any `netuart`s that might be running, and then run `main_tb`.  `main_tb` may also be given an argument, which is the name of any (ELF) program to run within the CPU within.  This program will then be loaded into design memory, and the design will begin as though it were already loaded at startup.  For example, `main_tb ../../sw/rv32/fftsimtest` will run a simulated-based test of the internal FFT.  A `-d` flag may also be used to generate a `.vcd` trace file as well for debugging purposes.  Do be aware, this trace faile can become quite large.  (I usually kill the simulation before it gets to 20GB.)"
 
-
-## Known Issues
- - If python3 is not found when running cmake for projtrellis, update line 28 by checking /usr/lib64 (currently 1.69.0)

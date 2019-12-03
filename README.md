@@ -36,17 +36,13 @@ Link status can be easily verified by running
 from `zipversa/sw/host` once the design has been loaded. 
 
 ## Before You Begin
-
 ### Verify Jumper Placement
 From  [Project Trellis](https://github.com/SymbiFlow/prjtrellis/blob/master/examples/versa5g/README.md): "If your Versa board is new, you will need to change J50 to bypass the iSPclock. Re-arrange the jumpers to connect pins 1-2 and 3-5 (leaving one jumper spare)."
-See page 20 the [user guide](https://www.mouser.com/catalog/additional/Lattice_EB98.pdf).
-
+See page 20 of the [user guide](https://www.mouser.com/catalog/additional/Lattice_EB98.pdf).
 ### Verify Flash Device
 The flash controller is configured to run in QUAD I/O XIP mode and uses commands specific to the Micron N25Q128A flash device. While the Macronix flash device has similar commands, it does not support XIP mode. Therefore, the design currently only works with Micron N25Q128A flash devices (or a device with XIP support and the same commands as Micron)
-
 ### Verify Network Connectivity
 Verify IP addresses of the testbed, as well as MAC address of the board. Ensure that the networking hardware, including cables, support Gigabit ethernet.
-
 ### Verify Host Connectivity
 Ensure that your machine can see the FPGA via the USB cable. Running `lsusb` should print out something along the lines of:
 ```bash

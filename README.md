@@ -210,14 +210,14 @@ dnf -y install ncurses-devel
 
 #### ZipVersa
 Now that we have set up our environment, we can now get to building the actual ZipVersa project. 
-###### Clone Git
+##### Clone Git
 Clone Git
 ```c
 git clone https://github.com/asanaullah/zipversa
 cd zipversa/
 ```
 
-###### Update Network Addresses
+##### Update Network Addresses
 Using the `sed` command, update the network parameters specified above. 
 ```c
 sed -i "58d" sw/rv32/etcnet.h
@@ -234,18 +234,18 @@ sed -i "208d" sw/host/testfft.cpp
 sed -i "208i 	UDPSOCKET *skt = new UDPSOCKET(\"${DEVIP[0]}.${DEVIP[1]}.${DEVIP[2]}.${DEVIP[3]}\");" sw/host/testfft.cpp
 ```
 
-###### Build Project
+##### Build Project
 ```c
 make
 ```
 
-###### Program Board
+##### Program Board
 Make sure that the `ecp5-versa.cfg` matches your board. If not, find the appropriate one in `/usr/share/trellis/misc/openocd` and link to that. 
 ```c
 openocd -f ecp5-versa.cfg -c "transport select jtag; init; svf rtl/zipversa.svf; exit"
 ```
 
-###### Start UART Connection
+##### Start UART Connection
 While we could have started this as a background process in the same terminal, it throws out a lot of garbage values which make it difficult to read the actual board responses. `gnome-terminal` wasn't working for me so I ran it using `xterm` instead. Note that unless `netuart` is run, the board will not respond. 
 ```c
 dnf -y install xterm
@@ -253,7 +253,7 @@ cd sw/host
 xterm -hold  -e ./netuart /dev/$UBP&
 ```
 
-###### Load FFT design for PicoRV
+##### Load FFT design for PicoRV
 This checks the board flash memory to see if it matches the FFT program. If so, the command completes. Otherwise, sector by sector, the memory is erased and the FFT program is written. 
 ```c
 ./zipload ../rv32/fftmain
@@ -262,7 +262,7 @@ Note that once the flash memory has been programmed, the design will start execu
 
 Also note that it is likely that there will be a couple of failed attempts to get the MAC address; this is fine. If, however, the `xterm` window opened earlier continues to print that the ARP-lookup failed, double check the network parameters specified in the beginning and run `./netstat` to verify that the link is 1000Mbps.  
 
-###### Run FFT Application
+##### Run FFT Application
 Running `./testfft` causes the board to send out ARP-packets again, this time trying to get the MAC address of the host machine. Then the `testfft` application sends the board four impulse functions, which computes the FFT, and returns the transforms back to the host. 
 ```c
 ./testfft
@@ -270,20 +270,20 @@ Running `./testfft` causes the board to send out ARP-packets again, this time tr
 The figure below shows an example result of loading the FFT program onto the board and running the host application. Note that the errors seen are due to a mismatch in the operating frequencies of the RISCV core and the network controller. This should not significantly impact the observed waveforms in the next step of the script. 
 ![alt text](https://github.com/asanaullah/ZipVersa-SSDP/blob/master/fft_uart_display.png)
 
-###### Display results returned by FPGA
+##### Display results returned by FPGA
 Finally, we plot the waveforms for the four returned transforms. 
 ```c
 dnf -y install octave
 octave ./chkfftresults.m 
 ```
 
-#### Other Example Designs
+##### Other Example Designs
 Execute from `zipversa/sw/host`. Ensure that `netuart` is running. 
-###### Gettysburg
+- Gettysburg:
 `./zipload ../rv32/gettysburg`
 This will print out the Gettysburg address on the `netuart` terminal. 
 
-###### Ping Test
+- Ping Test:
 `./zipload ../rv32/pingtest`
 This will ping the router and print the results on the `netuart` terminal. 
 

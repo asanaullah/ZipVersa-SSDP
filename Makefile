@@ -4,7 +4,7 @@ all: dependencies run check all-yosys all-trellis all-nextpnr all-gcc all-openfp
 
 dependecies:
 	sudo dnf -y groupinstall "Development Tools" "Development Libraries"
-	sudo dnf -y install cmake clang bison flex mercurial gperf tcl-devel libftdi-devel python-xdot elfutils-devel boost-python3-devel eigen3-devel qt5-devel libmpc-devel texinfo xterm verilator
+	sudo dnf -y install cmake clang bison flex mercurial gperf tcl-devel libftdi-devel python-xdot elfutils-devel boost-python3-devel eigen3-devel qt5-devel libmpc-devel texinfo xterm verilator openocd
 
 check: | run
 	octave ./chkfftresults.m

@@ -1,4 +1,4 @@
-sdfUBP=ttyUSB1
+$UBP=ttyUSB1
 
 all: dependencies run check all-yosys all-trellis all-nextpnr all-gcc all-openfpga all-elfutils all-zipversa
 

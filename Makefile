@@ -23,7 +23,7 @@ all-zipversa: | all-autofpga
 all-autofpga: | all-gcc
 	cd autofpga && make -j$(nproc) 
 
-all-gcc: | all-openocd
+all-gcc: | all-autofpga
 	cd  riscv-gnu-toolchain && ./configure --prefix=${PWD}/installdir/riscv --with-arch=rv32i --with-abi=ilp32 && make  -j$(nproc) 
 
 

@@ -105,13 +105,11 @@ cd ..
 ```
 
 #### Boost.Python 3
-Next we install Boost.Python 3, which is needed by Project Trellis. The issue here is that the Project Trellis`cmake` script looks for `libboost_python3xx.so`, while the actual installed library file is typically called `libboost_python3xx.so.x.xx.x`. 
+Next we install Boost.Python 3, which is needed by Project Trellis. We need to install the development package.
 
-The fix here was to create a symbolic link. It is a simple solution, but not a stable one. When Boost.Python gets updated, the `1.69.0` will likely change. Therefore, if the cmake in Project Trellis (below) fails, double check the boost-python3 version update the `ln` command accordingly.  
 
 ```c
-dnf -y install boost-python3
-ln -s /usr/lib64/libboost_python37.so.1.69.0  /usr/lib64/libboost_python37.so
+dnf -y install boost-python3-devel
 ```
 
 

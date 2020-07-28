@@ -189,14 +189,7 @@ cd ..
 #### ELF Utils
 Libelf is needed to build the applications in `sw/host`.
 ```c
-git clone git://sourceware.org/git/elfutils.git
-cd elfutils
-autoreconf -i -f
-./configure --enable-maintainer-mode --disable-debuginfod
-make
-make check
-make install
-cd ..
+dnf -y install elfutils-libelf-devel
 ```
 
 #### NCURSES
